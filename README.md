@@ -1,6 +1,6 @@
 # awscli-with-assume-role
 
-[![Docker Repository on Quay](https://quay.io/repository/sisuite/awscli-with-assume-role/status "Docker Repository on Quay")](https://quay.io/repository/sisuite/awscli-with-assume-role) [![pipeline status](https://gitlab.com/sgreben/docker-awscli-with-assume-role/badges/master/pipeline.svg)](https://gitlab.com/sgreben/docker-awscli-with-assume-role/commits/master)
+[![Docker Repository on Quay](https://quay.io/repository/sisuite/awscli-with-assume-role/status "Docker Repository on Quay")](https://quay.io/repository/sisuite/awscli-with-assume-role) [![pipeline status](https://gitlab.com/sgreben/docker-awscli-with-assume-role/badges/master/pipeline.svg)](https://gitlab.com/sgreben/docker-awscli-with-assume-role/pipelines)
 
 Run `aws` CLI commands under an assumed role (defined by the value of the environment variable `ASSUME_ROLE_ARN`).
 
