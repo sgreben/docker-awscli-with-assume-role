@@ -2,43 +2,15 @@
 
 # parameters
 arnOfRoleToAssume=$ASSUME_ROLE_ARN
+randomRoleSessionName=$(date +%s)
+roleSessionName=${ASSUME_ROLE_SESSION_NAME:-$randomRoleSessionName}
 
-# naming
-initialProfileName=initial # the profile with credentials we use to assume the role
-assumeRoleProfileName=assume_role # the sub-profile that forces the role-assumption
+eval "$(/usr/local/bin/aws sts assume-role --role-session-name="$roleSessionName" --role-arn="$arnOfRoleToAssume" --output text --query='
+  join(`"\n"`, [
+    join(``, [`"export AWS_ACCESS_KEY_ID="`, Credentials.AccessKeyId]),
+    join(``, [`"export AWS_SECRET_ACCESS_KEY="`, Credentials.SecretAccessKey]),
+    join(``, [`"export AWS_SESSION_TOKEN="`, Credentials.SessionToken])
+  ])'
+)"
 
-# generate shared credentials file for env-defined AWS credentials
-awsSharedCredentialsFileForInitialCredentials="$(mktemp)";
-cat > "$awsSharedCredentialsFileForInitialCredentials" <<EOF
-[$initialProfileName]
-EOF
-if [ -n "${AWS_ACCESS_KEY_ID:-}" ]; then
-cat >> "$awsSharedCredentialsFileForInitialCredentials" <<EOF
-aws_access_key_id = $AWS_ACCESS_KEY_ID
-EOF
-fi
-if [ -n "${AWS_SECRET_ACCESS_KEY:-}" ]; then
-cat >> "$awsSharedCredentialsFileForInitialCredentials" <<EOF
-aws_secret_access_key = $AWS_SECRET_ACCESS_KEY
-EOF
-fi
-chmod 400 "$awsSharedCredentialsFileForInitialCredentials"; # -r--------
-
-# hide original env credentials (they have higher precedence than AWS_DEFAULT_PROFILE and would otherwise override that)
-unset AWS_ACCESS_KEY_ID
-unset AWS_SECRET_ACCESS_KEY
-
-# generate config file for role assumption
-awsConfigFileForAssumeRole="$(mktemp)";
-cat > "$awsConfigFileForAssumeRole" <<EOF
-[profile $assumeRoleProfileName]
-role_arn = $arnOfRoleToAssume
-source_profile = $initialProfileName
-EOF
-chmod 400 "$awsConfigFileForAssumeRole"; # -r--------
-
-# run with assume-role AWS profile
-export AWS_DEFAULT_PROFILE=$assumeRoleProfileName
-export AWS_SHARED_CREDENTIALS_FILE=$awsSharedCredentialsFileForInitialCredentials
-export AWS_CONFIG_FILE=$awsConfigFileForAssumeRole
 exec /usr/local/bin/aws "$@"
