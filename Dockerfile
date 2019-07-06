@@ -1,4 +1,4 @@
-FROM python:alpine3.10
+FROM python:3.7.3-alpine3.10
 ARG CLI_VERSION=1.16.190
 
 # get AWS CLI and its dependencies (groff)
