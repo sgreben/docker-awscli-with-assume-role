@@ -1,7 +1,6 @@
 FROM python:alpine
 
-# get AWS CLI and its dependencies (groff)
-RUN apk -uv add --no-cache groff
+# get AWS CLI
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
