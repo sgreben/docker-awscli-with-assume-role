@@ -1,4 +1,4 @@
-FROM python:3.7.3-alpine3.10
+FROM python:alpine
 
 # get AWS CLI and its dependencies (groff)
 RUN apk -uv add --no-cache groff
