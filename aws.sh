@@ -22,7 +22,7 @@ cat >> "$awsSharedCredentialsFileForInitialCredentials" <<EOF
 aws_secret_access_key = $AWS_SECRET_ACCESS_KEY
 EOF
 fi
-chmod 666 "$awsSharedCredentialsFileForInitialCredentials"; # -r--------
+chmod 400 "$awsSharedCredentialsFileForInitialCredentials"; # -r--------
 
 # hide original env credentials (they have higher precedence than AWS_DEFAULT_PROFILE and would otherwise override that)
 unset AWS_ACCESS_KEY_ID
@@ -35,7 +35,7 @@ cat > "$awsConfigFileForAssumeRole" <<EOF
 role_arn = $arnOfRoleToAssume
 source_profile = $initialProfileName
 EOF
-chmod 666 "$awsConfigFileForAssumeRole"; # -r--r--r--
+chmod 400 "$awsConfigFileForAssumeRole"; # -r--------
 
 # run with assume-role AWS profile
 export AWS_DEFAULT_PROFILE=$assumeRoleProfileName
