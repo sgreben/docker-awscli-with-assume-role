@@ -9,7 +9,7 @@ RUN mkdir -p /.aws/cli/cache && \
     chown -R nobody:nobody /.aws && \
     chmod -R a+rwx /.aws
 
-# set up /etc/profile
-RUN mv /usr/local/bin/aws /usr/bin/aws
-COPY --chown=nobody:nobody aws.sh /usr/local/bin/aws
-RUN chmod a+x /usr/local/bin/aws
+# set up the assume-role wrapper
+COPY --chown=nobody:nobody aws.sh /wrapper/aws
+RUN chmod a+x /wrapper/aws
+ENV PATH=/wrapper:${PATH}
