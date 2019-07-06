@@ -41,4 +41,4 @@ chmod 400 "$awsConfigFileForAssumeRole"; # -r--------
 export AWS_DEFAULT_PROFILE=$assumeRoleProfileName
 export AWS_SHARED_CREDENTIALS_FILE=$awsSharedCredentialsFileForInitialCredentials
 export AWS_CONFIG_FILE=$awsConfigFileForAssumeRole
-/usr/bin/aws "$@"
+exec /usr/bin/aws "$@"
