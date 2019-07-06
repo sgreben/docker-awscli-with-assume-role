@@ -1,4 +1,12 @@
 language: minimal
+services:
+  - docker
+script:
+  - docker build -t awscli .
+  - export ASSUME_ROLE_ARN=arn:aws:iam::123456789012:role/demo
+  - export AWS_ACCESS_KEY_ID=AKIAAAAAAAAAAAAAAAAA
+  - export AWS_SECRET_ACCESS_KEY=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
+  - docker run --rm -i -e AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY -e ASSUME_ROLE_ARN awscli aws --version
 after_success:
   - git config --global user.email "build@travis-ci.com"
   - git config --global user.name "Travis CI"
