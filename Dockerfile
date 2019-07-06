@@ -1,9 +1,9 @@
 FROM python:3.7.3-alpine3.10
-ARG CLI_VERSION=1.16.190
 
 # get AWS CLI and its dependencies (groff)
 RUN apk -uv add --no-cache groff
-RUN pip install --no-cache-dir awscli=="${CLI_VERSION}"
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
 RUN mkdir -p /.aws/cli/cache && \
     chown -R nobody:nobody /.aws && \
