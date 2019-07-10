@@ -2,8 +2,8 @@
 
 # parameters
 arnOfRoleToAssume=$ASSUME_ROLE_ARN
-randomRoleSessionName=$(date +%s)
-roleSessionName=${ASSUME_ROLE_SESSION_NAME:-$randomRoleSessionName}
+timestampBasedRoleSessionName=$(date +%s)
+roleSessionName=${ASSUME_ROLE_SESSION_NAME:-$timestampBasedRoleSessionName}
 
 temporaryCredentialsEnv() {
   /usr/local/bin/aws sts assume-role \
