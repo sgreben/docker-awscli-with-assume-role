@@ -10,3 +10,4 @@ RUN mkdir -p /.aws/cli/cache && \
 COPY --chown=nobody:nobody aws.sh /wrapper/aws
 RUN chmod a+x /wrapper/aws
 ENV PATH=/wrapper:${PATH}
+CMD [ "aws" ]
