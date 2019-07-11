@@ -18,4 +18,5 @@ temporaryCredentialsEnv() {
 }
 
 assumeRoleEnv=$(temporaryCredentialsEnv)
-exec env $assumeRoleEnv /usr/local/bin/aws "$@"
+export $assumeRoleEnv
+exec /usr/local/bin/aws "$@"
