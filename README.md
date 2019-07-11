@@ -4,7 +4,7 @@
 
 Run `aws` CLI commands under an assumed role (defined by the value of the environment variable `ASSUME_ROLE_ARN`).
 
-Latest releases of `awscli` are automatically tracked, updated in [./requirements.txt](requirements.txt), and built as tagged Docker images (e.g. `sgreben/awscli-with-assume-role:1.16.193`) using [Renovate](https://renovatebot.com), [Gitlab CI](https://gitlab.com/sgreben/docker-awscli-with-assume-role/pipelines), and [Quay.io](https://quay.io/repository/sgreben/awscli-with-assume-role?tab=builds)/[DockerHub](https://hub.docker.com/r/sgreben/awscli-with-assume-role/builds).
+Latest releases of `awscli` are automatically tracked, updated in [./requirements.txt](requirements.txt), and built as tagged Docker images (e.g. `sgreben/awscli-with-assume-role:1.16.196`) using [Renovate](https://renovatebot.com), [Gitlab CI](https://gitlab.com/sgreben/docker-awscli-with-assume-role/pipelines), and [Quay.io](https://quay.io/repository/sgreben/awscli-with-assume-role?tab=builds)/[DockerHub](https://hub.docker.com/r/sgreben/awscli-with-assume-role/builds).
 
 ## Usage
 
