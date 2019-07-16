@@ -6,7 +6,7 @@ timestampBasedRoleSessionName=$(date +%s)
 roleSessionName=${ASSUME_ROLE_SESSION_NAME:-$timestampBasedRoleSessionName}
 
 temporaryCredentialsEnv() {
-  /usr/local/bin/aws sts assume-role \
+  aws sts assume-role \
     --role-session-name="$roleSessionName" \
     --role-arn="$arnOfRoleToAssume" \
     --output text \
@@ -19,4 +19,4 @@ temporaryCredentialsEnv() {
 
 assumeRoleEnv=$(temporaryCredentialsEnv)
 export $assumeRoleEnv
-exec /usr/local/bin/aws "$@"
+exec "$@"
